@@ -1,6 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import { Router, Request, Response } from 'express';
+
+const isImgLink = (url:string) => {
+  if (typeof url !== 'string') {
+    return false;
+  }
+  return (url.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi) !== null);
+}
 
 (async () => {
 
@@ -36,6 +44,18 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.get( "/", async ( req, res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
+
+  app.get("/filteredimage",async(req: Request,res:Response) => {
+    const image_url = req.query.image_url;
+    const is_image_url = isImgLink(image_url)
+    if (is_image_url == false){
+      return res.status(400).send("pass an image url")
+    }
+    const filtered_image = await filterImageFromURL(image_url);
+    res.status(200).sendFile(filtered_image, () => {
+      deleteLocalFiles([filtered_image])
+    })
+  })
   
 
   // Start the Server
