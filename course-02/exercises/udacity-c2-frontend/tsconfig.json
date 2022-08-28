@@ -1,10 +1,12 @@
 {
   "compileOnSave": false,
+  "skipLibCheck": true,
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "skipLibCheck": true,
     "declaration": false,
     "module": "es2020",
     "moduleResolution": "node",
@@ -12,12 +14,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2020",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"]
   }
 }

@@ -7,6 +7,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "tsc": "tsc",
+    "dev": "ts-node-dev ./src/server.ts",
+    "prod": "tsc && node ./www/server.js",
+    "clean": "rimraf www/ || true",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
