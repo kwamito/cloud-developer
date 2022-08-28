@@ -46,8 +46,8 @@ const isImgLink = (url:string) => {
   } );
 
   app.get("/filteredimage",async(req: Request,res:Response) => {
-    const image_url = req.query.image_url;
-    const is_image_url = isImgLink(image_url)
+    const image_url:string = req.query.image_url;
+    const is_image_url:boolean = isImgLink(image_url)
     if (is_image_url == false){
       return res.status(400).send("pass an image url")
     }

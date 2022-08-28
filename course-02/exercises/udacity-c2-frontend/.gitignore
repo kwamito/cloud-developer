@@ -41,3 +41,4 @@ node_modules
 .angular/cache
 dist/*
 Archive.zip
+update.zip
