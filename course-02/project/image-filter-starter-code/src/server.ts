@@ -10,6 +10,9 @@ const isImgLink = (url:string) => {
   return (url.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gmi) !== null);
 }
 
+// Note: Sought help from https://thewebdev.info/2021/08/15/how-to-verify-that-an-url-is-an-image-url-with-javascript/
+// for the above function
+
 (async () => {
 
   // Init the Express application
