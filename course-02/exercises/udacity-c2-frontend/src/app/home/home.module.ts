@@ -19,6 +19,7 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers:[FeedModule]
 })
 export class HomePageModule {}

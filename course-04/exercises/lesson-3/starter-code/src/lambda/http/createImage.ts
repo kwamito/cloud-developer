@@ -6,11 +6,13 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 
 const groupsTable = process.env.GROUPS_TABLE
 const imagesTable = process.env.IMAGES_TABLE
+console.log(imagesTable)
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   console.log('Caller event', event)
   const groupId = event.pathParameters.groupId
   const validGroupId = await groupExists(groupId)
+  const parsedBody = JSON.parse(event.body)
 
   if (!validGroupId) {
     return {
@@ -24,14 +26,23 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     }
   }
 
+  const newImage = {
+    ...parsedBody
+  }
+
   // TODO: Create an image
+
+  await docClient.put({
+    TableName: imagesTable,
+    Item: newImage,
+  }).promise()
 
   return {
     statusCode: 201,
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: ''
+    body: JSON.stringify({newImage})
   }
 }
 
